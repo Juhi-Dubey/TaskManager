@@ -9,13 +9,18 @@ async function getTasksProvider(req, res){
     console.log(query);
 
     try{
-        const tasks = await Task.find();
+        const { limit = 10, page = 1, order = "asc" } = query;
+
+        const tasks = await Task.find()
+            .sort({ createdAt: order === "asc" ? 1 : -1 })
+            .skip((page - 1) * limit)
+            .limit(limit);
         return res.status(StatusCodes.OK).json(tasks);
     }
     catch(error)
     {
         errorLogger("Error while fetching tasks", req, error);
-        return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             reason: "Unable to process your request at the moment, please try later."
         });
     }

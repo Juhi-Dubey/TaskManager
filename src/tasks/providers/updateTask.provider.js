@@ -9,8 +9,8 @@ async function updateTaskProvider(req, res){
 
     try{
         // fetch id
-        const task = await Task.findById(req.body["_id"]);
-        
+        const task = await Task.findById(validatedData._id);
+
         // update the task
         task.title = validatedData.title || task.title;
         task.description = validatedData.description || task.description;
@@ -25,7 +25,7 @@ async function updateTaskProvider(req, res){
 
     catch(error){
         errorLogger("Error while updating tasks", req, error);
-        return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             reason: "Unable to process your request at the moment, please try later."
         });
     }

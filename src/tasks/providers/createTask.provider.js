@@ -17,7 +17,7 @@ async function createTasksProvider(req, res){
     catch(error){
         errorLogger(`Error creating a new task: ${error.message}`, req, error);    
 
-        return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             reason: "Unable to process you request at the moment, please try later"
         });
     }

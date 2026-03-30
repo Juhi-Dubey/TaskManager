@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -12,7 +13,8 @@ const mongoose = require('mongoose');
 const expressWinstonLogger = require('./middleware/expressWinston.middleware.js');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
+
 
 app.use(express.json());
 
@@ -47,9 +49,10 @@ app.use((req, res)=>{
 
 async function bootstrap(){
     try{
-        await mongoose.connect('mongodb://localhost:27017/', 
-            {dbName: 'fullstackTasks'}
-        );
+        await mongoose.connect(process.env.MONGO_URI);
+        // await mongoose.connect('mongodb://localhost:27017/', 
+        //     {dbName: 'fullstackTasks'}
+        // );
         console.log("Connected to MongoDB");
     
         app.listen(port, () => {

@@ -5,11 +5,12 @@ const {StatusCodes} = require("http-status-codes");
 const createTaskValidator = require('./validators/createTask.validator.js');
 const getTasksValidator = require('./validators/getTasks.validator.js');
 const updateTaskValidator = require('./validators/updateTask.validator.js');
-const deletetaskvalidator = require('./validators/deleteTask.validator.js');
+const deleteTaskValidator = require('./validators/deleteTask.validator.js');
+const authMiddleware = require('../middleware/auth.middleware.js');
 
 const tasksRouter = express.Router();
 
-tasksRouter.get('/tasks', getTasksValidator, (req, res) =>{
+tasksRouter.get('/tasks', authMiddleware, getTasksValidator, (req, res) =>{
     const result = validationResult(req);
 
     if(result.isEmpty()){
@@ -20,7 +21,7 @@ tasksRouter.get('/tasks', getTasksValidator, (req, res) =>{
     }
 });
 
-tasksRouter.post('/tasks', createTaskValidator, (req, res)=>{
+tasksRouter.post('/tasks', authMiddleware, createTaskValidator, (req, res)=>{
     const result = validationResult(req);
 
     if(result.isEmpty()){
@@ -32,7 +33,7 @@ tasksRouter.post('/tasks', createTaskValidator, (req, res)=>{
 });
 
 
-tasksRouter.patch('/tasks', updateTaskValidator, (req, res) =>{
+tasksRouter.patch('/tasks/:id', authMiddleware, updateTaskValidator, (req, res) =>{
     const result = validationResult(req);
 
     if(result.isEmpty()){
@@ -44,7 +45,7 @@ tasksRouter.patch('/tasks', updateTaskValidator, (req, res) =>{
 });
 
 
-tasksRouter.delete('/tasks',deletetaskvalidator, (req, res) =>{
+tasksRouter.delete('/tasks/:id', authMiddleware, deleteTaskValidator, (req, res) =>{
     const result = validationResult(req);
 
     if(result.isEmpty()){

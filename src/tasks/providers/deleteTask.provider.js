@@ -14,7 +14,7 @@ async function deleteTaskProvider(req, res){
     }
     catch(error){
         errorLogger("Error while deleting tasks", req, error);
-        return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             reason: "Unable to process your request at the moment, please try later."
         });
     }

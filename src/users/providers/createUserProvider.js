@@ -2,7 +2,7 @@ const User = require("../user.schema.js");
 const { matchedData } = require('express-validator');
 const {StatusCodes} = require('http-status-codes');
 const errorLogger = require('../../helpers/errorLogger.helper.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 async function createUserProvider(req, res){
     const validatedData = matchedData(req);
@@ -25,9 +25,15 @@ async function createUserProvider(req, res){
     }
 
     catch(error){
+        if (error.code === 11000) {
+            return res.status(409).json({
+                message: "Email already exists",
+            });
+        }
+
         errorLogger(`Error creating a user: ${error.message}`, req, error);    
 
-        return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             reason: "Unable to process your request at the moment, please try later"
         }); 
     }
