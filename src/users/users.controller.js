@@ -1,5 +1,6 @@
 const { StatusCodes} = require("http-status-codes");
-const createUserProvider = require("./providers/createUserProvider");
+const {createUserProvider} = require("./providers/createUserProvider");
+const {getUserProvider} = require("./providers/getUserProvider");
 
 
 async function createUser(req, res) {
@@ -7,6 +8,10 @@ async function createUser(req, res) {
 };
 
 
+async function getProfile(req, res) {
+    return await getUserProvider(req, res);
+}
+
 module.exports = {
-    createUser,
+    createUser, getProfile,
 }

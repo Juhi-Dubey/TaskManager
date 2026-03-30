@@ -39,4 +39,4 @@ async function createUserProvider(req, res){
     }
 }
 
-module.exports = createUserProvider;
+module.exports = {createUserProvider};

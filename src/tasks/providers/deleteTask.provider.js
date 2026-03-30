@@ -9,7 +9,10 @@ async function deleteTaskProvider(req, res){
     const validatedData = matchedData(req);
 
     try{
-        const deletedTask = await Task.deleteOne({_id: validatedData["_id"]}); 
+        const deletedTask = await Task.deleteOne({
+            _id: validatedData._id,
+            user: req.user.id
+        }); 
         res.status(StatusCodes.OK).json(deletedTask);
     }
     catch(error){

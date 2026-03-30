@@ -1,10 +1,8 @@
-POST http://localhost:3001/tasks
+PUT http://localhost:3001/users/profile
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FiYWUzYWIyMzI3MjNlYTI3Y2U4ZSIsImlhdCI6MTc3NDg5MzgxOSwiZXhwIjoxNzc0OTgwMjE5fQ.-6iBQ4XOal1THen9AYCSjFf0aK_ZwoRrI5j4rGTLvoI
+
 {
-    "title":  "Title2",
-    "dueDate": "2026-03-30T00:00:00.000Z",
-    "description": "Description of the task",
-    "priority": "normal",
-    "status": "todo"
+    "firstName": "Slice",
+    "lastName": "Doe"
 }

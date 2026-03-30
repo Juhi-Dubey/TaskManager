@@ -1,8 +1,18 @@
 const express = require('express');
 const authController = require('./auth.controller.js');
+const { validationResult } = require("express-validator");
+const { StatusCodes } = require("http-status-codes");
+const loginUserValidator = require("./validators/loginUser.validator");
+const router = express.Router();
 
-const authRouter = express.Router();
+router.post("/login", loginUserValidator, (req, res) => {
+    const errors = validationResult(req);
 
-authRouter.post('/login', authController.handleLogin);
+    if (!errors.isEmpty()) {
+        return res.status(StatusCodes.BAD_REQUEST).json(errors.array());
+    }
 
-module.exports = authRouter;
+    return authController.loginUser(req, res);
+});
+
+module.exports = router;

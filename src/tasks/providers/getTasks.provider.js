@@ -11,11 +11,15 @@ async function getTasksProvider(req, res){
     try{
         const { limit = 10, page = 1, order = "asc" } = query;
 
-        const tasks = await Task.find()
+        const tasks = await Task.find({ user: req.user.id })
             .sort({ createdAt: order === "asc" ? 1 : -1 })
             .skip((page - 1) * limit)
             .limit(limit);
-        return res.status(StatusCodes.OK).json(tasks);
+        if (tasks.length === 0) {
+            return res.status(200).json({
+                message: "No tasks found"
+            });
+        }
     }
     catch(error)
     {

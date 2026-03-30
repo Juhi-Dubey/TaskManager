@@ -9,7 +9,10 @@ async function updateTaskProvider(req, res){
 
     try{
         // fetch id
-        const task = await Task.findById(validatedData._id);
+        const task = await Task.findOne({
+            _id: validatedData._id,
+            user: req.user.id
+        });
 
         // update the task
         task.title = validatedData.title || task.title;

@@ -1,2 +1,2 @@
-GET http://localhost:3001/tasks?limit=10&page=1&order=asc
+GET http://localhost:3001/users/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FiYWUzYWIyMzI3MjNlYTI3Y2U4ZSIsImlhdCI6MTc3NDg5MzgxOSwiZXhwIjoxNzc0OTgwMjE5fQ.-6iBQ4XOal1THen9AYCSjFf0aK_ZwoRrI5j4rGTLvoI
