@@ -3,8 +3,8 @@ POST http://localhost:3001/users/create
 Content-Type: application/json
 
 {
-    "firstName": "Anni",
-    "lastName": "Pani",
-    "email": "anni@pani.com",
-    "password": "Qwer1234#"
+    "firstName": "Slice",
+    "lastName": "Doe",
+    "email": "slice@doe.com",
+    "password": "Asdf1234#"
 }

@@ -8,7 +8,14 @@ async function createUserProvider(req, res){
     const validatedData = matchedData(req);
 
     try{        
+        const existingUser = await User.findOne({ email: validatedData.email });
 
+        if (existingUser) {
+            return res.status(StatusCodes.CONFLICT).json({
+                message: "Email already exists",
+            });
+        }
+        
         const hashedPassword = await bcrypt.hash(validatedData.password, 10);
         const user = new User({
             firstName: validatedData.firstName,
