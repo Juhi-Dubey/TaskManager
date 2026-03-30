@@ -1,0 +1,31 @@
+{
+  "name": "section29",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "staging": "cross-env NODE_ENV=staging nodemon src/index.js",
+    "start": "cross-env NODE_ENV=production nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "Juhi",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "express-winston": "^4.2.0",
+    "http-status-codes": "^2.3.0",
+    "mongodb": "^7.1.0",
+    "mongoose": "^9.3.1",
+    "morgan": "^1.10.1",
+    "winston": "^3.19.0"
+  }
+}

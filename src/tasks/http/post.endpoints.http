@@ -1,0 +1,10 @@
+POST http://localhost:3001/tasks
+Content-Type: application/json
+
+{
+    "title":  "Title of the task",
+    "dueDate": "2026-03-17T00:00:00.000Z",
+    "description": "Description of the task",
+    "priority": "normal",
+    "status": "todo"
+}
