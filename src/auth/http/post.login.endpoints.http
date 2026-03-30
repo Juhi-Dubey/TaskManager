@@ -3,5 +3,12 @@ Content-Type: application/json
 
 {
     "email": "anni@pani.com",
-    "password": "Qwer1234#"
+    "password": "New@1234"
+}
+
+
+POST http://localhost:3001/auth/refresh-token
+Content-Type: application/json
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FkMGQ4NjQ2MTdiN2I2YjlkMjM2MSIsImlhdCI6MTc3NDkwMjY4OSwiZXhwIjoxNzc1NTA3NDg5fQ.voeCfJU5yagA_tXeZI3QhD1m5-RsvdxWMo2I2wUBySw"
 }

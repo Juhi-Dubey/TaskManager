@@ -43,6 +43,10 @@ const userSchema = new Schema({
         //     message: () => `Password must include at least one digit, one uppercase character, one lowercase character, and one special character`,
         // },
     },
+    refreshToken: {
+        type: String,
+        default: null
+    },
 
 },{
     timestamps: true,

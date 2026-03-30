@@ -26,11 +26,20 @@ async function loginUserProvider(req, res) {
         }
 
         // 3. Generate token
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
             { id: user._id },
             process.env.JWT_SECRET,
-            { expiresIn: "1d" }
+            { expiresIn: "15m" }
         );
+
+        const refreshToken = jwt.sign(
+            { id: user._id },
+            process.env.JWT_REFRESH_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        user.refreshToken = refreshToken;
+        await user.save();
 
         // 4. Remove password
         const userObj = user.toObject();
@@ -38,7 +47,8 @@ async function loginUserProvider(req, res) {
 
         return res.status(StatusCodes.OK).json({
             user: userObj,
-            token
+            accessToken,
+            refreshToken
         });
 
     } catch (error) {
