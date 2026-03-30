@@ -1,4 +1,4 @@
-const User = require("../../users/user.schema");
+const {User} = require("../../users/user.schema");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { StatusCodes } = require("http-status-codes");
@@ -48,4 +48,4 @@ async function loginUserProvider(req, res) {
     }
 }
 
-module.exports = loginUserProvider;
+module.exports = {loginUserProvider};

@@ -12,4 +12,4 @@ const createUserValidator = [
 
 ];
 
-module.exports = createUserValidator;
+module.exports = {createUserValidator};

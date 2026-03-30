@@ -9,11 +9,11 @@ const createTaskValidator = [
     body("title").trim(),
     body("dueDate", "duedate must be a valid ISO8601 string").notEmpty().isISO8601(),
     body("description", "The description cannot be empty and needs to be a string").notEmpty().isString().trim(),
-    body("description", "The description cannot b emore than 500 characters").isLength({max: 500}),
+    body("description", "The description cannot be more than 500 characters").isLength({max: 500}),
 
     body("priority").isIn(['low', 'normal', 'high']),
     body("status").isIn(['todo', 'inProgress', 'completed']),
 
 ];
 
-module.exports = createTaskValidator;
+module.exports = {createTaskValidator};

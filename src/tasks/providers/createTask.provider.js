@@ -1,29 +1,29 @@
 const {matchedData} = require('express-validator');
-const Task = require("../task.schema.js");
+const {Task} = require("../task.schema.js");
 const {StatusCodes} = require("http-status-codes");
-const errorLogger = require('../../helpers/errorLogger.helper.js');
+const {errorLogger} = require('../../helpers/errorLogger.helper.js');
 
 
 async function createTasksProvider(req, res){
 
     const validatedResult = matchedData(req);
     
-    // const task = new Task({
-    //     ...req.body,
-    //     user: req.user.id
-    // });
-    
     const task = new Task({
-        title: req.body.title,
-        description: req.body.description,
-        dueDate: req.body.dueDate,
-        priority: req.body.priority,
-        status: req.body.status,
+        ...validatedResult,
         user: req.user.id
     });
+    
+    // const task = new Task({
+    //     title: req.body.title,
+    //     description: req.body.description,
+    //     dueDate: req.body.dueDate,
+    //     priority: req.body.priority,
+    //     status: req.body.status,
+    //     user: req.user.id
+    // });
 
     console.log("FINAL TASK BEFORE SAVE:", task);
-    
+
     try{
         await task.save();
         return res.status(StatusCodes.CREATED).json(task);
@@ -39,4 +39,4 @@ async function createTasksProvider(req, res){
 }
 
 
-module.exports = createTasksProvider;
+module.exports = {createTasksProvider};

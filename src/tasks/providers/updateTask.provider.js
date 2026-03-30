@@ -1,7 +1,7 @@
-const Task = require("../task.schema.js");
+const {Task} = require("../task.schema.js");
 const { matchedData } = require('express-validator');
 const {StatusCodes} = require('http-status-codes');
-const errorLogger = require('../../helpers/errorLogger.helper.js');
+const {errorLogger} = require('../../helpers/errorLogger.helper.js');
 
 
 async function updateTaskProvider(req, res){
@@ -13,6 +13,12 @@ async function updateTaskProvider(req, res){
             _id: validatedData._id,
             user: req.user.id
         });
+
+        if(!task){
+            return res.status(StatusCodes.NOT_FOUND).json({
+                message: "Task not found"
+            });
+        }
 
         // update the task
         task.title = validatedData.title || task.title;
@@ -35,4 +41,4 @@ async function updateTaskProvider(req, res){
          
 }
 
-module.exports = updateTaskProvider;
+module.exports = {updateTaskProvider};

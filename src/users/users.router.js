@@ -1,19 +1,20 @@
 const express = require('express');
-const usersController = require('./users.controller.js');
-const createUserValidator = require('./validators/createUser.validator.js')
+const {createUser, getProfile, deleteUser} = require('./users.controller.js');
+const {createUserValidator} = require('./validators/createUser.validator.js')
 const {StatusCodes} = require("http-status-codes");
 const { validationResult} = require('express-validator');
-const authMiddleware = require('../middleware/auth.middleware.js');
+const {authMiddleware} = require('../middleware/auth.middleware.js');
 const { getUserProvider} = require('./providers/getUserProvider.js');
 const {updateUserProvider} = require('./providers/updateUserProvider.js');
-
+const { deleteUserProvider } = require('./providers/deleteUserProvider.js');
 const usersRouter = express.Router();
+
 
 usersRouter.post('/create', createUserValidator, (req, res)=>{
     const result = validationResult(req);
 
     if(result.isEmpty()){
-        return usersController.createUser(req, res);
+        return createUser(req, res);
     }
     else{
         return res.status(StatusCodes.BAD_REQUEST).json(result.array());
@@ -24,4 +25,7 @@ usersRouter.get("/profile", authMiddleware, getUserProvider);
 
 usersRouter.put("/profile", authMiddleware, updateUserProvider);
 
-module.exports = usersRouter;
+usersRouter.delete("/delete", authMiddleware, deleteUserProvider);
+
+
+module.exports = {usersRouter};

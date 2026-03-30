@@ -5,12 +5,12 @@ const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 const { StatusCodes } = require('http-status-codes');
-const responseFormatter = require('./middleware/responseFormatter.js');
-const tasksRouter = require('./tasks/tasks.router.js');
-const authRouter = require('./auth/auth.router.js');
-const usersRouter = require('./users/users.router.js')
+const {responseFormatter} = require('./middleware/responseFormatter.js');
+const {tasksRouter} = require('./tasks/tasks.router.js');
+const {authRouter} = require('./auth/auth.router.js');
+const {usersRouter} = require('./users/users.router.js')
 const mongoose = require('mongoose');
-const expressWinstonLogger = require('./middleware/expressWinston.middleware.js');
+const {expressWinstonLogger} = require('./middleware/expressWinston.middleware.js');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -41,6 +41,7 @@ app.use(expressWinstonLogger);
 app.use('/', tasksRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+
 
 
 app.use((req, res)=>{

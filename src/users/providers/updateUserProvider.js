@@ -1,4 +1,4 @@
-const User = require("../user.schema");
+const {User} = require("../user.schema");
 const { StatusCodes } = require("http-status-codes");
 
 async function updateUserProvider(req, res) {

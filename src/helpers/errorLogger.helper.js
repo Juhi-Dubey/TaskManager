@@ -1,4 +1,4 @@
-const logger = require('./winston.helper.js');
+const {logger} = require('./winston.helper.js');
 
 
 function errorLogger(message, req, error){
@@ -16,4 +16,4 @@ function errorLogger(message, req, error){
 }
 
 
-module.exports = errorLogger;
+module.exports = {errorLogger};

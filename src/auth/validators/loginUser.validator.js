@@ -10,4 +10,4 @@ const loginUserValidator = [
         .notEmpty().withMessage("Password is required")
 ];
 
-module.exports = loginUserValidator;
+module.exports = {loginUserValidator};

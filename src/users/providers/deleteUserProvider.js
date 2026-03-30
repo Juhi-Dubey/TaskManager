@@ -1,9 +1,11 @@
 const {User} = require("../user.schema");
 const { StatusCodes } = require("http-status-codes");
 
-async function getUserProvider(req, res) {
+async function deleteUserProvider(req, res) {
     try {
-        const user = await User.findById(req.user.id).select("-password");
+        const userId = req.user.id;
+
+        const user = await User.findByIdAndDelete(userId);
 
         if (!user) {
             return res.status(StatusCodes.NOT_FOUND).json({
@@ -11,7 +13,10 @@ async function getUserProvider(req, res) {
             });
         }
 
-        return res.status(StatusCodes.OK).json(user);
+        return res.status(StatusCodes.OK).json({
+            message: "User deleted successfully"
+        });
+
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             message: "Something went wrong"
@@ -19,4 +24,4 @@ async function getUserProvider(req, res) {
     }
 }
 
-module.exports = {getUserProvider};
+module.exports = {deleteUserProvider};

@@ -1,8 +1,8 @@
 
-const {body} = require("express-validator");
+const {param, body} = require("express-validator");
 
 const updateTaskValidator = [
-    body("_id", "Valid document id is required").notEmpty().isMongoId(),
+    param("_id", "Valid document id is required").notEmpty().isMongoId(),
     body("title", "Title must be a string").optional().isString().trim(),
     body("title", "The length cannot be more than 100 chars").isLength({max: 100}),
 
@@ -14,4 +14,4 @@ const updateTaskValidator = [
     body("status").isIn(['todo', 'inProgress', 'completed']).optional(),
 ]   
 
-module.exports = updateTaskValidator;
+module.exports = {updateTaskValidator};

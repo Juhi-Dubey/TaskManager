@@ -1,13 +1,13 @@
 
-const loginUserProvider = require("./providers/loginUser.provider");
+const {loginUserProvider} = require("./providers/loginUser.provider");
 
 async function loginUser(req, res) {
     return await loginUserProvider(req, res);
 }
 
-module.exports = {
-    loginUser
-};
+
+
+module.exports = {loginUser};
 
 
 // const User = require("../users/user.schema.js");

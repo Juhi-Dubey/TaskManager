@@ -1,8 +1,8 @@
 
-const Task = require("../task.schema.js");
+const {Task} = require("../task.schema.js");
 const { matchedData } = require('express-validator');
 const {StatusCodes} = require('http-status-codes');
-const errorLogger = require('../../helpers/errorLogger.helper.js');
+const {errorLogger} = require('../../helpers/errorLogger.helper.js');
 
 
 async function deleteTaskProvider(req, res){
@@ -24,4 +24,4 @@ async function deleteTaskProvider(req, res){
     
 }
 
-module.exports = deleteTaskProvider;
+module.exports = {deleteTaskProvider};

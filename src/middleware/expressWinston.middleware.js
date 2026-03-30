@@ -1,6 +1,6 @@
 
 const expressWinston = require('express-winston');
-const logger = require('../helpers/winston.helper.js');
+const {logger} = require('../helpers/winston.helper.js');
 
 const expressWinstonLogger = expressWinston.logger({
     winstonInstance: logger,
@@ -11,4 +11,4 @@ const expressWinstonLogger = expressWinston.logger({
 
 });
 
-module.exports = expressWinstonLogger;
+module.exports = {expressWinstonLogger};
