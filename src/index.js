@@ -1,4 +1,18 @@
 require('dotenv').config();
+
+if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not defined");
+}
+
+if (!process.env.JWT_REFRESH_SECRET) {
+    throw new Error("JWT_REFRESH_SECRET is not defined");
+}
+
+if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI is not defined");
+}
+
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -20,7 +34,7 @@ app.use(express.json());
 
 
 const corsOptions ={
-    origin: [ "http://localhost:3001" ],    
+    origin: [ "http://localhost:3001", "http://localhost:3000" ],    
 }
 
 app.use(cors(corsOptions));
@@ -38,7 +52,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(responseFormatter);
 app.use(expressWinstonLogger);
 
-app.use('/', tasksRouter);
+app.use('/tasks', tasksRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 

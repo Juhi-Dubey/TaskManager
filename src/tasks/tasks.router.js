@@ -11,51 +11,30 @@ const {authMiddleware} = require('../middleware/auth.middleware.js');
 const tasksRouter = express.Router();
 
 
-tasksRouter.get('/tasks', authMiddleware, getTasksValidator, (req, res) =>{
-    const result = validationResult(req);
+// 🧪 reusable validator handler (so you stop repeating yourself)
+function validate(req, res, next) {
+  const errors = validationResult(req);
 
-    if(result.isEmpty()){
-        return handleGetTasks(req, res);
-    }
-    else{
-        res.status(StatusCodes.BAD_REQUEST).json(result.array());
-    }
-});
+  if (!errors.isEmpty()) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+        errors: errors.array()
+    });
+  }
 
-tasksRouter.post('/tasks', authMiddleware, createTaskValidator, (req, res)=>{
-    const result = validationResult(req);
-
-    if(result.isEmpty()){
-        return handlePostTasks(req, res);
-    }
-    else{
-        res.status(StatusCodes.BAD_REQUEST).json(result.array());
-    }
-});
+  next();
+}
 
 
-tasksRouter.patch('/tasks/:id', authMiddleware, updateTaskValidator, (req, res) =>{
-    const result = validationResult(req);
-
-    if(result.isEmpty()){
-        return handlePatchTasks(req, res);
-    }
-    else{
-        res.status(StatusCodes.BAD_REQUEST).json(result.array());
-    }
-});
+tasksRouter.get("/", authMiddleware, getTasksValidator, validate, handleGetTasks);
 
 
-tasksRouter.delete('/tasks/:id', authMiddleware, deleteTaskValidator, (req, res) =>{
-    const result = validationResult(req);
-
-    if(result.isEmpty()){
-        return handleDeleteTasks(req, res);
-    }
-    else{
-        res.status(StatusCodes.BAD_REQUEST).json(result.array());
-    }
-});
+tasksRouter.post("/", authMiddleware, createTaskValidator, validate, handlePostTasks);
 
 
-module.exports = {tasksRouter};
+tasksRouter.patch("/:id", authMiddleware, updateTaskValidator, validate, handlePatchTasks);
+
+
+tasksRouter.delete("/:id", authMiddleware, deleteTaskValidator, validate, handleDeleteTasks);
+
+
+module.exports = { tasksRouter };

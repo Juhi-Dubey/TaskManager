@@ -9,14 +9,14 @@ const path = require("path");
 // debug(4)
 // silly(5)
 
-
+// level: info means it will log info, warn and error
 
 const transports = [
     new winston.transports.Console({
         level: "info",
         format: winston.format.combine(
             winston.format.colorize(),
-            // winston.format.simple()
+            winston.format.simple()
         ),
     }),
 

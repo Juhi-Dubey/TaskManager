@@ -1,9 +1,9 @@
 POST http://localhost:3001/tasks
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FiYWUzYWIyMzI3MjNlYTI3Y2U4ZSIsImlhdCI6MTc3NDg5MzgxOSwiZXhwIjoxNzc0OTgwMjE5fQ.-6iBQ4XOal1THen9AYCSjFf0aK_ZwoRrI5j4rGTLvoI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FkMGQ4NjQ2MTdiN2I2YjlkMjM2MSIsImlhdCI6MTc3NDk1MTc3NiwiZXhwIjoxNzc0OTUyNjc2fQ.z58syzQmlv2iDsuiouBg0WyYnHE5czZvfuOqRkz7uIw
 {
-    "title":  "Title2",
-    "dueDate": "2026-03-30T00:00:00.000Z",
+    "title":  "Title5",
+    "dueDate": "2026-03-31T00:00:00.000Z",
     "description": "Description of the task",
     "priority": "normal",
     "status": "todo"

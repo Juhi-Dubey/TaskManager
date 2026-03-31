@@ -1,19 +1,31 @@
-const {body} = require('express-validator');
-
+const { body } = require("express-validator");
 
 const createTaskValidator = [
+  body("title")
+    .notEmpty().withMessage("Title is required")
+    .isString().withMessage("Title must be a string")
+    .isLength({ max: 100 }).withMessage("Title cannot exceed 100 characters")
+    .trim(),
 
-    body("title", "The title cannot be empty").notEmpty(),
-    body("title", "The title must be a string").isString(),
-    body("title", "The length cannot be more than 100 chars").isLength({max: 100}),
-    body("title").trim(),
-    body("dueDate", "duedate must be a valid ISO8601 string").notEmpty().isISO8601(),
-    body("description", "The description cannot be empty and needs to be a string").notEmpty().isString().trim(),
-    body("description", "The description cannot be more than 500 characters").isLength({max: 500}),
+  body("description")
+    .notEmpty().withMessage("Description is required")
+    .isString().withMessage("Description must be a string")
+    .isLength({ max: 500 }).withMessage("Description cannot exceed 500 characters")
+    .trim(),
 
-    body("priority").isIn(['low', 'normal', 'high']),
-    body("status").isIn(['todo', 'inProgress', 'completed']),
+  body("dueDate")
+    .notEmpty().withMessage("Due date is required")
+    .isISO8601().withMessage("Due date must be a valid ISO8601 date"),
 
+  body("priority")
+    .optional()
+    .isIn(["low", "normal", "high"])
+    .withMessage("Priority must be low, normal, or high"),
+
+  body("status")
+    .optional()
+    .isIn(["todo", "inProgress", "completed"])
+    .withMessage("Status must be todo, inProgress, or completed"),
 ];
 
-module.exports = {createTaskValidator};
+module.exports = { createTaskValidator };

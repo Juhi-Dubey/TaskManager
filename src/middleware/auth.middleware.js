@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken");
 const { StatusCodes } = require("http-status-codes");
 
+
+
 function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
+    console.log("AUTH HEADER:", req.headers.authorization);
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -20,11 +23,13 @@ function authMiddleware(req, res, next) {
     catch (error) {
         if(error.name === "TokenExpiredError"){
             return res.status(StatusCodes.UNAUTHORIZED).json({
-                message: "Token expired",
+                // message: "Token expired",
+                message: "Unauthorized",
             });
         }
         return res.status(StatusCodes.UNAUTHORIZED).json({
-            message: "Invalid token",
+            // message: "Invalid token",
+            message: "Unauthorized",
         });
     }
 }

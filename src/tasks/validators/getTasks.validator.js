@@ -1,11 +1,23 @@
-const {query} = require('express-validator');
-
+const { query } = require("express-validator");
 
 const getTasksValidator = [
-    query("limit", "limit must be a valid int").optional().isInt().toInt(),
-    query("page", "page must be a valid int").optional().isInt().toInt(),
-    query("order", "order must be one of ['asc, 'desc']").optional().toLowerCase().isIn(['asc', 'desc']),
+  query("limit")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Limit must be a positive integer")
+    .toInt(),
 
+  query("page")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Page must be a positive integer")
+    .toInt(),
+
+  query("order")
+    .optional()
+    .toLowerCase()
+    .isIn(["asc", "desc"])
+    .withMessage("Order must be 'asc' or 'desc'"),
 ];
 
-module.exports = {getTasksValidator};
+module.exports = { getTasksValidator };

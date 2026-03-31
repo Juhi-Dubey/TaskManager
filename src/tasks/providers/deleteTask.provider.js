@@ -1,27 +1,14 @@
 
 const {Task} = require("../task.schema.js");
-const { matchedData } = require('express-validator');
-const {StatusCodes} = require('http-status-codes');
-const {errorLogger} = require('../../helpers/errorLogger.helper.js');
 
 
-async function deleteTaskProvider(req, res){
-    const validatedData = matchedData(req);
+async function deleteTaskProvider(taskId, userId) {
+    const task = await Task.findOneAndDelete({
+        _id: taskId,
+        user: userId
+    });
 
-    try{
-        const deletedTask = await Task.deleteOne({
-            _id: validatedData._id,
-            user: req.user.id
-        }); 
-        res.status(StatusCodes.OK).json(deletedTask);
-    }
-    catch(error){
-        errorLogger("Error while deleting tasks", req, error);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            reason: "Unable to process your request at the moment, please try later."
-        });
-    }
-    
+    return task;
 }
 
-module.exports = {deleteTaskProvider};
+module.exports = { deleteTaskProvider };

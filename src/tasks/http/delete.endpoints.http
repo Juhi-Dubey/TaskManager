@@ -1,6 +1,3 @@
-DELETE http://localhost:3001/tasks
+DELETE http://localhost:3001/tasks/69cb943710c49982a179d7fd
 Content-Type: application/json
-
-{
-    "_id": "69be3c2dcacb3510b44c0f35"
-}       
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FkMGQ4NjQ2MTdiN2I2YjlkMjM2MSIsImlhdCI6MTc3NDk0OTEyOSwiZXhwIjoxNzc0OTUwMDI5fQ.Vr197EO5iePuFK9Ny3Oa3uu1hWVVdWD7QX2lnAMRTD8

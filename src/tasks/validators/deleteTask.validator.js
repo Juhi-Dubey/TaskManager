@@ -1,10 +1,9 @@
-const {param} = require('express-validator');
-
+const { param } = require("express-validator");
 
 const deleteTaskValidator = [
-
-    param("id", "Valid document id is required").notEmpty().isMongoId(),
-
+  param("id")
+    .notEmpty().withMessage("Task ID is required")
+    .isMongoId().withMessage("Invalid task ID"),
 ];
 
-module.exports = {deleteTaskValidator};
+module.exports = { deleteTaskValidator };

@@ -1,8 +1,6 @@
-PATCH http://localhost:3001/tasks
+PATCH http://localhost:3001/tasks/69cb94f310c49982a179d801
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FkMGQ4NjQ2MTdiN2I2YjlkMjM2MSIsImlhdCI6MTc3NDk1MTc3NiwiZXhwIjoxNzc0OTUyNjc2fQ.z58syzQmlv2iDsuiouBg0WyYnHE5czZvfuOqRkz7uIw
 Content-Type: application/json
-
 {
-    "_id": "69cabae3ab232723ea27ce8e",
-    "title":  "Newly Updated"
-    
+  "title": "Updated title"
 }

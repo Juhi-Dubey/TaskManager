@@ -1,17 +1,35 @@
-
-const {param, body} = require("express-validator");
+const { param, body } = require("express-validator");
 
 const updateTaskValidator = [
-    param("_id", "Valid document id is required").notEmpty().isMongoId(),
-    body("title", "Title must be a string").optional().isString().trim(),
-    body("title", "The length cannot be more than 100 chars").isLength({max: 100}),
+  param("id")
+    .notEmpty().withMessage("Task ID is required")
+    .isMongoId().withMessage("Invalid task ID"),
 
-    body("dueDate", "due date must be a valid ISO8601 string").optional().isISO8601(),
-    body("description", "The description cannot be empty and needs to be a string").optional().isString().trim(),
-    body("description", "The description cannot be more than 500 characters").isLength({max: 500}),
+  body("title")
+    .optional()
+    .isString().withMessage("Title must be a string")
+    .isLength({ max: 100 }).withMessage("Title cannot exceed 100 characters")
+    .trim(),
 
-    body("priority").isIn(['low', 'normal', 'high']).optional(),
-    body("status").isIn(['todo', 'inProgress', 'completed']).optional(),
-]   
+  body("description")
+    .optional()
+    .isString().withMessage("Description must be a string")
+    .isLength({ max: 500 }).withMessage("Description cannot exceed 500 characters")
+    .trim(),
 
-module.exports = {updateTaskValidator};
+  body("dueDate")
+    .optional()
+    .isISO8601().withMessage("Due date must be valid"),
+
+  body("priority")
+    .optional()
+    .isIn(["low", "normal", "high"])
+    .withMessage("Invalid priority"),
+
+  body("status")
+    .optional()
+    .isIn(["todo", "inProgress", "completed"])
+    .withMessage("Invalid status"),
+];
+
+module.exports = { updateTaskValidator };

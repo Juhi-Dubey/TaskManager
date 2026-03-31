@@ -1,9 +1,9 @@
 const express = require('express');
-const {loginUser} = require('./auth.controller.js');
+const {loginUserController} = require('./auth.controller.js');
 const { validationResult } = require("express-validator");
 const { StatusCodes } = require("http-status-codes");
 const {loginUserValidator} = require("./validators/loginUser.validator");
-const { refreshToken } = require("./auth.controller.js");
+const { refreshTokenController }= require("./auth.controller.js");
 const authRouter = express.Router();
 
 
@@ -14,9 +14,9 @@ authRouter.post("/login", loginUserValidator, (req, res) => {
         return res.status(StatusCodes.BAD_REQUEST).json(errors.array());
     }
 
-    return loginUser(req, res);
+    return loginUserController(req, res);
 });
 
-authRouter.post("/refresh-token", refreshToken);
+authRouter.post("/refresh-token", refreshTokenController);
 
 module.exports = {authRouter};
