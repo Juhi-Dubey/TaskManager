@@ -73,7 +73,7 @@ npm run dev
 
 * **POST** `/users/create` → Create user
 * **GET** `/users/profile` → Get user profile
-* **PUT** `/users/profile` → Update user profile
+* **PUT** `/users/update` → Update user profile
 * **PUT** `/users/update-password` → Update password
 * **DELETE** `/users/delete` → Delete user
 
@@ -93,7 +93,6 @@ npm run dev
 ```id="structure-final"
 src
 ├── auth
-│   ├── http
 │   ├── providers
 │   ├── services
 │   ├── validators
@@ -101,15 +100,14 @@ src
 │   └── auth.router.js
 │
 ├── users
-│   ├── http
 │   ├── providers
+│   ├── services
 │   ├── validators
 │   ├── user.schema.js
 │   ├── users.controller.js
 │   └── users.router.js
 │
 ├── tasks
-│   ├── http
 │   ├── providers
 │   ├── services
 │   ├── validators
