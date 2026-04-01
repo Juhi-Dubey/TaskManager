@@ -4,12 +4,15 @@ const {Task} = require('../task.schema.js');
 async function getTasksProvider({ userId, limit, page, order }) {
     const skip = (page - 1) * limit;
 
-    const tasks = await Task.find({ user: userId })
-        .sort({ createdAt: order === "asc" ? 1 : -1 })
-        .skip(skip)
-        .limit(limit);
+    const [tasks, total] = await Promise.all([
 
-    return tasks;
+        Task.find({ user: userId })
+            .sort({ createdAt: order === "asc" ? 1 : -1 })
+            .skip(skip)
+            .limit(limit),
+        Task.countDocuments({user: userId})
+    ]); 
+    return {tasks, total};
 }
 
 module.exports = { getTasksProvider };

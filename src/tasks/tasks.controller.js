@@ -7,11 +7,13 @@ const { deleteTaskService } = require("./services/deleteTask.service");
 
 async function handleGetTasks(req, res){
     try {
-        const tasks = await getTasksService(req.query, req.user.id);
+        const result = await getTasksService(req.query, req.user.id);
+
 
         return res.status(StatusCodes.OK).json({
             message: "Tasks fetched successfully",
-            data: tasks
+            data: result.tasks,
+            pagination: result.pagination
         });
 
     } catch (error) {

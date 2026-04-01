@@ -10,14 +10,30 @@ async function getTasksService(query, userId) {
         throw { status: 400, message: "Invalid pagination values" };
     }
 
-    const tasks = await getTasksProvider({
+    if(limit > 20){
+        limit = 20
+    }
+
+    const {tasks, total} = await getTasksProvider({
         userId,
         limit,
         page,
         order
     });
 
-    return tasks;
+    const totalPages = Math.ceil(total/ limit);
+
+    return{
+        tasks, 
+        pagination: {
+            total, 
+            totalPages,
+            currentPage: page,
+            hasNextPage: page < totalPages,
+            hasPrevPage: page > 1
+        }
+    }
+
 }
 
 module.exports = { getTasksService };
