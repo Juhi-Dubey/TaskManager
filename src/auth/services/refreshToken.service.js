@@ -12,14 +12,14 @@ async function refreshTokenService(token) {
 
     const user = await User.findById(decoded.id);
 
-    if (!user) {
-        throw { status: 401, message: "Invalid refresh token" };
+    if (!user || !user.refreshToken) {
+        throw { status: 401, message: "Invalid or expired refresh token" };
     }
 
     const isValid = await bcrypt.compare(token, user.refreshToken);
 
     if (!isValid) {
-        throw { status: 401, message: "Invalid refresh token" };
+        throw { status: 401, message: "Invalid or expired refresh token" };
     }
 
     const newAccessToken = jwtProvider.generateAccessToken(user._id);

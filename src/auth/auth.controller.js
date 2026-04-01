@@ -3,7 +3,7 @@
 const { loginUserService } = require("./services/loginUser.service");
 const { StatusCodes } = require("http-status-codes");
 const { refreshTokenService } = require("./services/refreshToken.service.js");
-
+const {logoutUserService} = require("./services/logoutUser.service.js")
 
 
 async function loginUserController(req, res) {
@@ -35,7 +35,32 @@ async function refreshTokenController(req, res) {
 }
 
 
-module.exports = { loginUserController, refreshTokenController };
+async function handleLogoutController(req, res) {
+    console.log(req.user);
+
+    try {
+        const userId = req.user.id;
+
+        if (!userId) {
+            throw { status: 400, message: "User not found in request" };
+        }
+
+        await logoutUserService(userId);
+
+        return res.status(200).json({
+            message: "Logged out successfully",
+            success: true
+        });
+    } 
+    catch (error) {
+        return res.status(error.status || 500).json({
+            message: error.message || "Something went wrong"
+        });
+    }
+}
+
+
+module.exports = { loginUserController, refreshTokenController, handleLogoutController };
 
 
 

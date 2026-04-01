@@ -3,7 +3,8 @@ const {loginUserController} = require('./auth.controller.js');
 const { validationResult } = require("express-validator");
 const { StatusCodes } = require("http-status-codes");
 const {loginUserValidator} = require("./validators/loginUser.validator");
-const { refreshTokenController }= require("./auth.controller.js");
+const { refreshTokenController, handleLogoutController }= require("./auth.controller.js");
+const { authMiddleware } = require('../middleware/auth.middleware.js');
 const authRouter = express.Router();
 
 
@@ -18,5 +19,7 @@ authRouter.post("/login", loginUserValidator, (req, res) => {
 });
 
 authRouter.post("/refresh-token", refreshTokenController);
+
+authRouter.post("/logout", authMiddleware, handleLogoutController);
 
 module.exports = {authRouter};
