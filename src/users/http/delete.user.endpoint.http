@@ -1,5 +1,5 @@
 DELETE http://localhost:3001/users/delete
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FiYWUzYWIyMzI3MjNlYTI3Y2U4ZSIsImlhdCI6MTc3NDg5ODI4MCwiZXhwIjoxNzc0OTg0NjgwfQ.zfD2laPj4pbZ6-FhYewuFgG-Ht9lHvq_0vVSR2LjxUM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2Q1ZWMyYzlmMmRmM2EzNjdhZmZiYSIsImlhdCI6MTc3NTA2Njg3NSwiZXhwIjoxNzc1MDY3Nzc1fQ.fWpTjbmXfmonYx7cwlo_KIF3hdfLQPsAwjd7DXDPjnM
 {
     "message": "User deleted successfully"
 }
